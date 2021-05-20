@@ -18,7 +18,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic.edit import FormMixin 
 import json
-from article.models import Article, Like_post
+from ..models import Article, Like_post, Like_comment, Comment
 from article.forms import ArticleForm, SearchForm
 
 
@@ -78,15 +78,14 @@ class ArticleView(FormMixin,DetailView):
         context['token'] = self.request.COOKIES['csrftoken']
         try:
             if self.object.post_like.filter(user=self.request.user):
-                context['is_liked'] = True
+                context['is_liked_post'] = True
             else:
-                context['is_liked'] = False
+                context['is_liked_post'] = False
         except TypeError:
             return self.render_to_response(context)
         return self.render_to_response(context)
     
     def post(self, request, *args, **kwargs):
-        print('post')
         if not request.user.is_authenticated:
             return redirect('login')
         self.object = self.get_object()
@@ -103,6 +102,32 @@ class ArticleView(FormMixin,DetailView):
         like = self.object.post_like.filter(user=self.request.user)
         like.delete()
         return HttpResponse(self.object.count_likes())
+
+class LikeCommentView(CreateView):
+    model = Like_comment
+    success_url = reverse_lazy('article:view')
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        comm = Comment.objects.get(pk=self.kwargs.get('pk'))
+        if comm.comment_like.filter(user=self.request.user):
+            self.delete(request)
+            return HttpResponse(comm.count_likes())
+        else:
+            like = Like_comment()
+            like.user = self.request.user
+            like.comment = comm
+            like.save()
+            return HttpResponse(comm.count_likes())
+
+    def delete(self, request, *args, **kwargs) :
+        if not request.user.is_authenticated:
+            return redirect('login')
+        comm = Comment.objects.get(pk=self.kwargs.get('pk'))
+        like = comm.comment_like.filter(user=self.request.user)
+        like.delete()
+        return HttpResponse(comm.count_likes())
 
 
 class CreateArticleView(PermissionRequiredMixin, CreateView):

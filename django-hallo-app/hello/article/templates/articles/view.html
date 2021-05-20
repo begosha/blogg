@@ -27,7 +27,7 @@
     <p>Tags: {% for tag in article.tags.all %}{{ tag.tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     <p>Likes: {{ article.count_likes }}</p>
     {% if user.is_authenticated %}
-        {% if is_liked %}
+        {% if is_liked_post %}
         <button class="btn" id="{% url 'article:view' article.pk %}"  onclick="unlike(event)"> <i class="fas fa-heart"></i></button>
         {% else %}
             <button class="btn" id="{% url 'article:view' article.pk %}" onclick="like(event)"><i class="far fa-heart"></i></button>
@@ -36,6 +36,10 @@
     <h2>Comments:</h2>
     {% for comment in article.comments.all %}
         <p>{{ comment.author }}: {{ comment.comment }}</p>
+        <p>Likes: {{ comment.count_likes }}</p>
+        {% if user.is_authenticated %}
+        <button class="btn" id="{% url 'article:like' comment.pk %}" onclick="like(event)"><i class="far fa-heart"></i></button>
+    {% endif %}
     {% empty %}
         <p>Нет комментариев :(</p>
     {% endfor %}

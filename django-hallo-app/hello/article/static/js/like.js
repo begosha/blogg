@@ -21,7 +21,6 @@ function getCookie(name) {
 
 function like(event){
     let article = event.currentTarget
-    console.log(article)
     $.post({
         url: article.id,
         method: 'POST',

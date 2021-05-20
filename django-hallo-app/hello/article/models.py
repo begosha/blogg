@@ -97,7 +97,6 @@ class Like_post(models.Model):
         verbose_name='postLike'
         verbose_name_plural='postLikes'
 
- 
 
 class Like_comment(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=CASCADE, null=False, related_name="like")
