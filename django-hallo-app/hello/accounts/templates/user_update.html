@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Редактировать профиль{% endblock %}
+{% block page_header %}Редактирование профиля{% endblock %}
+
+
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% comment %} подключем шаблон с формой для данных профиля пользователя
+        при этом передаем специальный атрибут, по которому мы ориентируемся,
+        нужно ли в форме выводить кнопку подтверждения и CSRF-токен {% endcomment %}
+        {% include "partial/form.html" with form=profile_form fields_only=True %}
+
+        {% comment %} подключем шаблон с формой для данных пользователя
+        вышеуказанный аттрибут не передаётся, соответственно в форме
+        будут выведены кнопка подтверждения и CSRF-токен {% endcomment %}
+        {% include "partial/form.html" with button_text="Сохранить" %}
+
+        {% comment %}
+            Так как обе формы добавлены в одном теге form - с точки зрения HTML - это
+            будет одна форма, не зависимо от того, что мы обрабатываем их как две отдельные.
+            Две отдельные формы - это только с точки зрения Django.
+        {% endcomment %}
+    </form>
+{% endblock %}

@@ -1,0 +1,31 @@
+
+{% if is_paginated %}
+    {% include 'partial/paginate.html' %}
+{% endif %}
+
+
+{% for article in articles %}
+    <div class="box">
+        <h3><a href="{% url "article:view" article.pk %}">{{ article.title }}</a></h3>
+        <p>
+            <label for="selected_articles-{{ article.pk }}">Select:</label>
+
+            <input type="checkbox" name="selected_articles"
+
+                   id="selected_articles-{{ article.pk }}" value="{{ article.pk }}">
+        </p>
+
+        <p>
+            <a href="{% url 'accounts:user-detail' article.author_id %}">{{ article.author }}</a>
+            | {{ article.created_at|date:"d.m.Y H:i:s" }}
+        </p>
+    </div>
+
+{% empty %}
+    <h2 class="text-center">Нет статей</h2>
+{% endfor %}
+
+
+{% if is_paginated %}
+     {% include 'partial/pagination.html' %}
+{% endif %}

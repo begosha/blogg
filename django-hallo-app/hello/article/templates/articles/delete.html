@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Подтвердите удаление статьи{% endblock %}
+{% block page_header %}Вы уверены, что хотите удалить статью {{ article.title }}?{% endblock page_header %}
+
+{% block content%}
+    <form action="{% url "article:delete" article.id %}", method="POST">
+        {% include 'partial/form.html' with button_text="Да, я хочу удалить статью" %}
+        <a href="{% url "article:view" article.id %}">Отмена. Код красный. КОД КРАСНЫЙ!!</a>
+    </form>
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Новостной портал номер [-1] в мире{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/navbar.css" %}">
+    <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/v5.11.1/css/free.min.css" media="all">
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul class="menu">
+            <li><a href="{% url "article:list" %}">Все статьи</a></li>
+                {% if user.is_authenticated %}
+                    <li class="menu_right"><a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Выйти</a></li>
+                    <li class="menu_right"><a href="{% url 'accounts:user-detail' user.id %}">Профиль</a></li>
+                {% else %}
+                    <li class="menu_right"><a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Войти</a></li>
+                    <li class="menu_right"><a href="{% url 'accounts:register' %}?next={{ request.get_full_path }}">Зарегистрироваться</a></li>
+                {% endif %}
+            {% block menu %}{% endblock %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>{% block page_header %}Лучшие статьи в мире!{% endblock page_header %}</h1>
+        {% block content %}{% endblock content %}
+    </div>
+
+</body>
+</html>

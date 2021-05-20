@@ -1,0 +1,85 @@
+[
+{
+    "model": "article.article",
+    "pk": 1,
+    "fields": {
+        "created_at": "2021-02-22T14:10:25.751Z",
+        "updated_at": "2021-04-13T05:24:24.092Z",
+        "title": "Заголовок статьи 1",
+        "content": "Контент нашей первой статьи",
+        "author": [
+            "author"
+        ],
+        "tags": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "article.article",
+    "pk": 2,
+    "fields": {
+        "created_at": "2021-02-22T14:10:25.751Z",
+        "updated_at": "2021-04-13T05:24:24.098Z",
+        "title": "Заголовок статьи 2",
+        "content": "Контент нашей второй статьи",
+        "author": [
+            "author"
+        ],
+        "tags": [
+            1
+        ]
+    }
+},
+{
+    "model": "article.article",
+    "pk": 3,
+    "fields": {
+        "created_at": "2021-02-22T14:10:25.751Z",
+        "updated_at": "2021-04-13T05:24:24.101Z",
+        "title": "Заголовок статьи 3",
+        "content": "Контент нашей третьей статьи",
+        "author": [
+            "author"
+        ],
+        "tags": [
+            1
+        ]
+    }
+},
+{
+    "model": "article.article",
+    "pk": 4,
+    "fields": {
+        "created_at": "2021-02-22T14:10:25.751Z",
+        "updated_at": "2021-04-13T05:24:24.103Z",
+        "title": "Заголовок статьи 4",
+        "content": "Контент нашей четвёртой статьи",
+        "author": [
+            "author"
+        ],
+        "tags": [
+            1,
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "article.article",
+    "pk": 5,
+    "fields": {
+        "created_at": "2021-02-22T14:10:25.751Z",
+        "updated_at": "2021-04-13T05:24:24.104Z",
+        "title": "Заголовок статьи 5",
+        "content": "Контент нашей пятой статьи",
+        "author": [
+            "author"
+        ],
+        "tags": [
+            1
+        ]
+    }
+}
+]

@@ -1,0 +1,64 @@
+[
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Модератор",
+    "permissions": [
+      [
+        "change_article",
+        "article",
+        "article"
+      ],
+      [
+        "delete_article",
+        "article",
+        "article"
+      ],
+      [
+        "change_comment",
+        "article",
+        "comment"
+      ],
+      [
+        "delete_comment",
+        "article",
+        "comment"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 2,
+  "fields": {
+    "name": "Автор",
+    "permissions": [
+      [
+        "add_article",
+        "article",
+        "article"
+      ],
+      [
+        "add_comment",
+        "article",
+        "comment"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 3,
+  "fields": {
+    "name": "Пользователь",
+    "permissions": [
+      [
+        "add_comment",
+        "article",
+        "comment"
+      ]
+    ]
+  }
+}
+]

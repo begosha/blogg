@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    {% if perms.article.add_article %}
+        <li><a href="{% url "article:add" %}">Создать статью</a></li>
+    {% endif %}
+{% endblock menu %}
+
+{% block title %}Все статьи{% endblock title %}
+
+{% block page_header %}Все статьи{% endblock page_header %}
+
+{% block content %}
+    {% if not articles %}
+        <h2>НЕТ СТАТЕЙ</h2>
+    {% else %}
+        {% include "partial/search_form.html" %}
+    {% endif %}
+
+   {% include 'partial/article_list.html' %}
+
+{% endblock content %}

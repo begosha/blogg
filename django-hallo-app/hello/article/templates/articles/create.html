@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block page_header %}Добавить статью{% endblock page_header %}
+
+{% block content %}
+    <form action="/articles/add/" method="post">
+        {% include "partial/form.html" with button_text="Создать статью" %}
+    </form>
+{% endblock content %}

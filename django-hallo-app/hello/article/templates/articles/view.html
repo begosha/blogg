@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block menu %}
+    {% if perms.article.add_article %}
+        <li><a href="{% url "article:add" %}">Создать статью</a></li>
+    {% endif %}
+
+    {% if perms.article.change_article %}
+        <li><a href="{% url "article:update" article.id %}">Редактировать статью</a></li>
+    {% endif %}
+
+    {% if perms.article.delete_article %}
+        <li><a href="{% url "article:delete" article.id %}">Удалить статью</a></li>
+    {% endif %}
+
+    {% if perms.article.add_comment %}
+        <li><a href="{% url "article:comment-create" article.id %}">Добавить Комментарий</a></li>
+    {% endif %}
+{% endblock menu %}
+
+{% block page_header %}Статья {{ article.id }}{% endblock page_header %}
+
+{% block content %}
+    <p class = "token" id = {{ token }}>Title: {{ article.title }}</p>
+    <p>Author: {{ article.author }}</p>
+    <p>Content: {{ article.content }}</p>
+    <p>Tags: {% for tag in article.tags.all %}{{ tag.tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p>Likes: {{ article.count_likes }}</p>
+    {% if user.is_authenticated %}
+        {% if is_liked %}
+        <button class="btn" id="{% url 'article:view' article.pk %}"  onclick="unlike(event)"> <i class="fas fa-heart"></i></button>
+        {% else %}
+            <button class="btn" id="{% url 'article:view' article.pk %}" onclick="like(event)"><i class="far fa-heart"></i></button>
+        {% endif %}
+    {% endif %}
+    <h2>Comments:</h2>
+    {% for comment in article.comments.all %}
+        <p>{{ comment.author }}: {{ comment.comment }}</p>
+    {% empty %}
+        <p>Нет комментариев :(</p>
+    {% endfor %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="{% static 'js/like.js' %}" ></script>
+{% endblock content %}
+
+
